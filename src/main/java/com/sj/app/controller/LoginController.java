@@ -14,10 +14,7 @@ import com.sj.app.model.resp.LoginResp;
 import com.sj.app.service.AppUserService;
 import com.sj.app.service.LoginService;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -35,18 +32,18 @@ public class LoginController {
     @Resource
     private AppUserService appUserService;
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseVO<LoginResp> login(@RequestBody @Validated LoginReq req) {
         return loginService.login(req);
     }
 
-    @GetMapping("/register")
+    @PostMapping("/register")
     public ResponseVO<AppUser> register(@RequestBody @Validated RegisterReq req) {
         AppUser appUser = loginService.register(req);
         return ResponseVO.successResponse(appUser);
     }
 
-    @GetMapping("/search")
+    @PostMapping("/search")
     public ResponseVO<ImUserDataDto> searchUser(@RequestBody @Validated SearchUserReq req) {
         return appUserService.searchUser(req);
     }
